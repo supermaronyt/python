@@ -3,6 +3,15 @@ def vytiskni_ascii_tabulku(start, konec, sloupce):
 
     horni_hranice = "┌" + "─" * (sloupce * 9 - 1) + "┐"
     print(horni_hranice)
+    if sloupce == range(0, 10000):
+        if sloupce == 2:
+            print("│  ascii tabuůla  │")
+        elif sloupce == 3:
+            print("│       ascii tabuůla      │")
+        elif sloupce == 4:
+            print("│            ascii tabuůla          │")
+        elif sloupce == 5:
+            print("│                 ascii tabuůla              │")
 
     for radek in range(pocet_radku):
         prostredni_hranice = "├" + "─" * (sloupce * 9 - 1) + "┤"
