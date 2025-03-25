@@ -1,17 +1,18 @@
+import builtins
+from builtins import print, len, range, chr, int, input, str
+
+
 def vytiskni_ascii_tabulku(start, konec, sloupce):
     pocet_radku = (konec - start + 1 + sloupce - 1) // sloupce
 
     horni_hranice = "┌" + "─" * (sloupce * 9 - 1) + "┐"
     print(horni_hranice)
-    if sloupce == range(0, 10000):
-        if sloupce == 2:
-            print("│  ascii tabuůla  │")
-        elif sloupce == 3:
-            print("│       ascii tabuůla      │")
-        elif sloupce == 4:
-            print("│            ascii tabuůla          │")
-        elif sloupce == 5:
-            print("│                 ascii tabuůla              │")
+
+    celkova_sirka = sloupce * 9 - 2
+    text = "ascii tabulka"
+    mezery = (celkova_sirka - len(text)) // 2
+    extra_mezera = (celkova_sirka - len(text)) % 2
+    print("│" + " " * mezery + text + " " * (mezery + extra_mezera) + " │")
 
     for radek in range(pocet_radku):
         prostredni_hranice = "├" + "─" * (sloupce * 9 - 1) + "┤"
