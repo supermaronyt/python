@@ -91,3 +91,27 @@ for i, auto in enumerate(auta):
     print(Fore.MAGENTA + f"\n{auto}:")
     for j in range(2, len(parametry)):
         print(Fore.YELLOW + f"{parametry[j]}: {tabulka[i][j]}")
+
+print(Fore.GREEN + "\nTabulka kumulovanych nakladu na vlastnictvi:")
+hlavicka_kumulovane = ["Rok"] + auta
+data_kumulovane = []
+
+for rok in range(1, pocet_let + 1):
+    radek = [rok]
+    for i, auto in enumerate(auta):
+        cena = tabulka[i][0]
+        procenta = tabulka[i][1]
+        provozni_naklady = sum(
+            float(tabulka[i][j]) for j in range(2, len(parametry))
+        )
+        if rok == 1:
+            kumulovane_naklady = cena + provozni_naklady
+        else:
+            hodnota_predchozi = cena * ((1 - procenta / 100) ** (rok - 2))
+            hodnota_aktualni = cena * ((1 - procenta / 100) ** (rok - 1))
+            ztrata_hodnoty = hodnota_predchozi - hodnota_aktualni
+            kumulovane_naklady += provozni_naklady + ztrata_hodnoty
+        radek.append(f"{kumulovane_naklady:.2f}")
+    data_kumulovane.append(radek)
+
+print(tabulate(data_kumulovane, headers=hlavicka_kumulovane, tablefmt="fancy_grid"))
